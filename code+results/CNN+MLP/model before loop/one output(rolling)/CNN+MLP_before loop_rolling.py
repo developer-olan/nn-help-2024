@@ -22,18 +22,14 @@ import glob
 import cv2
 import tensorflow as tf
 from keras import backend as K
-from PIL import Image
-from skimage.io import imread, imshow
-import matplotlib.mlab as mlab
 from scipy.stats import norm
-import seaborn as sns
 
 
 # In[ ]:
 
 
 # Load Numerical Data
-df = pd.read_excel('/home/somayeh/Desktop/Fei/total.xlsx', dtype=np.float32, nrows = 2705)
+df = pd.read_excel('/Users/olanayanjoke/Documents/nn-help-02.2024/code+results/CNN+MLP/data set/total.xlsx', dtype=np.float32, nrows = 2705)
 df = df.drop(labels = ['Angle_left', 'Angle_right','Size'], axis = 1)
 df
 
@@ -41,7 +37,7 @@ df
 # In[ ]:
 
 
-images = glob.glob("/home/somayeh/Desktop/Fei/new_1.5_pic/*.png")
+images = glob.glob("/Users/olanayanjoke/Documents/nn-help-02.2024/code+results/CNN+MLP/data set/new_1.5_pic/*.png")
 images = sorted(images,key = lambda x: int(x.split('/')[-1].split('.')[0]))
 
 X= []
@@ -168,7 +164,8 @@ def my_metric(num_test, predict):
 
 model.compile(loss='mse', optimizer= 'Adam', metrics=[my_metric])
 # report path
-report_path = '/home/somayeh/Desktop/Fei/'
+report_path = '/Users/olanayanjoke/Documents/nn-help-02.2024/code+results/CNN+MLP/model before loop/one output(' \
+              'rolling)/'
 checkpoint = ModelCheckpoint(os.path.join(report_path, 'V11rolling.h5'),
                             monitor='val_loss',
                             mode='auto',
@@ -191,7 +188,7 @@ plt.xlabel('epoch')
 plt.ylabel('Loss')
 plt.title('The Loss')
 plt.legend()
-plt.savefig('/home/somayeh/Desktop/Fei/roll_Loss.png')
+plt.savefig('/Users/olanayanjoke/Desktop/NN/help/roll_Loss.png')
 plt.show()
 
 
@@ -204,7 +201,8 @@ plt.xlabel('epoch')
 plt.ylabel('accuracy')
 plt.title('The accuracy')
 plt.legend()
-plt.savefig('/home/somayeh/Desktop/Fei/roll_acc.png')
+plt.savefig('/Users/olanayanjoke/Documents/nn-help-02.2024/code+results/CNN+MLP/model before loop/one output('
+            'rolling)/roll_acc.png')
 plt.show()
 
 
@@ -231,6 +229,6 @@ plt.xlabel('Deviation')
 plt.ylabel('Probability')
 plt.title('Deviation of predictions for Rolling friction')
 plt.legend()
-plt.savefig('/home/somayeh/Desktop/Fei/rolling_Probability.png')
+plt.savefig('/Users/olanayanjoke/Documents/nn-help-02.2024/code+results/CNN+MLP/model before loop/one output(rolling)/rolling_Probability.png')
 plt.show()
 
